@@ -3,11 +3,16 @@ import styled from "styled-components";
 import NavbarLeft from "./NavbarLeft";
 
 const StyledBurger = styled.div`
-  width: 45px;
+  display: flex;
+  justify-content: center;
+  max-width: 150px;
   height: 30px;
   position: fixed;
-  top: 10px;
-  right: 20px;
+  right: 0;
+
+  
+  /* top: 20px;
+  right: 20px; */
 
   z-index: 20;
   display: none;
@@ -26,6 +31,7 @@ const StyledBurger = styled.div`
     transform-origin: 1px;
     transition: all 0.3s linear;
     background-color: ${(props) => props.theme.colors.white};
+    margin-right: 20px;
 
     &:nth-child(1) {
       transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};

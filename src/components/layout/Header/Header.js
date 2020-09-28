@@ -9,7 +9,8 @@ const StyledHeader = styled.header`
   z-index: 19;
   width: 100%;
   height: 100px;
-  background-color: ${(props) => props.theme.colors.mainRed};
+  background: rgb(39,54,66);
+background: linear-gradient(180deg, rgba(39,54,66,1) 0%, rgba(83,111,135,1) 100%);
 
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     flex-direction: column;

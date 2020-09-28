@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import NavbarSearch from "./NavbarSearch";
+// import NavbarSearch from "./NavbarSearch";
 
 const NavSection = styled.section`
   display: flex;
@@ -11,11 +11,15 @@ const NavSection = styled.section`
   height: 50px;
   /* background-color: yellow; */
 
-h1 {
-  font-size: ${(props) => props.theme.fontSizes.h1};
-  font-family: ${(props) => props.theme.fontStyles.lobster};
-  color: ${(props) => props.theme.colors.white}
-}
+  .hideLogo {
+    text-decoration: none;
+    h1 {
+      font-size: ${(props) => props.theme.fontSizes.h1};
+      font-family: ${(props) => props.theme.fontStyles.lobster};
+      color: ${(props) => props.theme.colors.white};
+    }
+  }
+
   ul {
     display: flex;
     align-items: center;
@@ -48,9 +52,9 @@ h1 {
     }
   }
 
-
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     flex-flow: column nowrap;
+    justify-content: flex-start;
     background-color: ${(props) => props.theme.colors.mainRed};
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
@@ -60,11 +64,17 @@ h1 {
     width: 300px;
     padding-top: 50px;
     transition: transform 0.3s ease-in-out;
-    align-items: flex-start;
+
+    .hideLogo {
+      display: none;
+    }
 
     ul {
       flex-flow: column nowrap;
-      height: 275px;
+      justify-content: flex-start;
+      height: auto;
+      width: 100%;
+      margin: 0;
 
       li {
         width: 100%;
@@ -99,9 +109,10 @@ const NavbarLeft = ({ open }) => {
           <Link to="/Produkter">Produkter</Link>
         </li>
       </ul>
-      <h1>
-        bageriet
-      </h1>
+      <Link to="/" className="hideLogo">
+        <h1>bageriet</h1>
+      </Link>
+
       <ul>
         <li>
           <Link to="/omRunit">Kontakt</Link>

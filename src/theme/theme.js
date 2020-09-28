@@ -2,7 +2,7 @@ export default {
   colors: {
     white: "#fff",
     dark: "#263238 ",
-    mainRed: "#bc3838",
+    mainRed: "#263238",
     black: "#000",
   },
   fontSizes: {

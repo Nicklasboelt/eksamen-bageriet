@@ -14,7 +14,7 @@ const Nav = styled.nav`
     display: none;
     align-items: center;
     justify-content: center;
-    min-width: 150px;
+    width: 150px;
     height: 50px;
     /* background-color: blue; */
 
@@ -24,15 +24,18 @@ const Nav = styled.nav`
       font-weight: bold;
       text-decoration: none;
 
-      span {
-        color: #292929;
-      }
+      
     }
   }
 
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     figure {
       display: flex;
+
+      span{
+        font-family: ${(props) => props.theme.fontStyles.lobster};
+        color: ${(props) => props.theme.colors.white};
+      }
     }
   }
 `;
@@ -45,7 +48,7 @@ const Navbar = () => {
             </div> */}
       <figure className="logoSection">
         <Link to="/">
-          RUN'<span>IT</span>
+            <span>bageriet</span> 
         </Link>
       </figure>
       <Burger />
