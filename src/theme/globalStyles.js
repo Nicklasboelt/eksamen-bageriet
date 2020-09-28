@@ -9,6 +9,9 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
+html{
+  scroll-behavior: smooth;
+}
 
 `;
 

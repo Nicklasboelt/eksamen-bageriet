@@ -49,6 +49,7 @@ const SliderContainer = styled.div`
         color: ${(props) => props.theme.colors.white};
         font-size: ${(props) => props.theme.fontSizes.h1};
         font-family: ${(props) => props.theme.fontStyles.lobster};
+        font-weight: ${(props) => props.theme.fontStyles.weightSmall};
       }
     }
   }
@@ -184,7 +185,7 @@ const SlideshowStatic = () => {
   }, []);
 
   return (
-    <SliderContainer>
+    <SliderContainer id="slider">
       <div className="slideshow-container">
         <figure className="mySlides fade">
           <img src={slide1} alt="Billede af brød" />

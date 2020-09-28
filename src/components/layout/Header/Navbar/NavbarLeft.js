@@ -17,6 +17,7 @@ const NavSection = styled.section`
       font-size: ${(props) => props.theme.fontSizes.h1};
       font-family: ${(props) => props.theme.fontStyles.lobster};
       color: ${(props) => props.theme.colors.white};
+      font-weight: ${(props) => props.theme.fontStyles.weightSmall};
     }
   }
 
@@ -115,10 +116,10 @@ const NavbarLeft = ({ open }) => {
 
       <ul>
         <li>
-          <Link to="/omRunit">Kontakt</Link>
+          <Link to="/Kontakt">Kontakt</Link>
         </li>
         <li className="li-removeBorder">
-          <Link to="/kontaktOs">Login</Link>
+          <Link to="/Login">Login</Link>
         </li>
       </ul>
     </NavSection>

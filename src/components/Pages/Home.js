@@ -1,15 +1,17 @@
 import React from "react";
-import News from "./News/News";
 import styled from 'styled-components'
 
 // Pages
 import Slider from "./Slideshow/Slider";
+import News from "./News/News";
+import NewsLetter from "./NyhedsBrev/NewsLetter";
+import NewProducts from "./NewProducts/NewProducts";
 
 
 // Styling
 const StyledMain = styled.main`
     max-width: 1200px;
-    height: 2000px;
+    min-height: auto;
     /* background-color: violet; */
     margin: 0 auto;
 `
@@ -19,8 +21,14 @@ const Home = () => {
     <div>
       <Slider />
       <StyledMain>
-        <News />
+        <News />  
       </StyledMain>
+      <NewsLetter />
+
+      <StyledMain>
+        <NewProducts />
+      </StyledMain>
+
     </div>
   );
 };

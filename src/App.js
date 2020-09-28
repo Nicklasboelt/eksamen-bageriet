@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
+
 
 
 // Layout
@@ -13,11 +14,13 @@ import Home from "./components/Pages/Home";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      
         <Header />
-        <Home />
+
+        {/* Routing */}
+        <Route exact path="/" component={Home} />
         <Footer />
-      </BrowserRouter>
+      
     </div>
   );
 }

@@ -22,6 +22,7 @@ const NewsContainer = styled.section`
     h2 {
       font-family: ${(props) => props.theme.fontStyles.lobster};
       color: ${(props) => props.theme.colors.textBlue};
+      font-weight: ${(props) => props.theme.fontStyles.weightSmall};
     }
   }
 
@@ -29,6 +30,7 @@ const NewsContainer = styled.section`
     width: 100%;
     height: auto;
     /* background-color: green; */
+    color: ${(props) => props.theme.colors.infoText};
   }
 
   .newsArticleContainer {
@@ -45,7 +47,6 @@ const NewsContainer = styled.section`
       width: 250px;
       min-height: 400px;
       margin: 0 50px 50px 50px;
-      
 
       figure {
         width: 100%;
@@ -76,6 +77,7 @@ const NewsContainer = styled.section`
         p {
           margin-top: 20px;
           line-height: 30px;
+          color: ${(props) => props.theme.colors.infoText};
         }
       }
     }
@@ -83,15 +85,14 @@ const NewsContainer = styled.section`
 
   @media ${({ theme }) => theme.mediaQueries.bellow768} {
     .newsArticleContainer {
-
       justify-content: flex-start;
       align-items: center;
       flex-flow: column nowrap;
-      
+
       article {
         width: 90%;
         max-width: 500px;
-}
+      }
     }
   }
 `;
@@ -111,7 +112,7 @@ const News = () => {
       return (
         <article key={n._id}>
           <figure>
-            <img src={"http://localhost:5033/images/" + n.image} alt="" />
+            <img src={"http://localhost:5033/images/" + n.image} alt={n.titel} />
           </figure>
           <div>
             <h3>{n.titel}</h3>

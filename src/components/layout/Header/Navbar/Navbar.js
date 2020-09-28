@@ -35,6 +35,7 @@ const Nav = styled.nav`
       span{
         font-family: ${(props) => props.theme.fontStyles.lobster};
         color: ${(props) => props.theme.colors.white};
+        font-weight: ${(props) => props.theme.fontStyles.weightSmall};
       }
     }
   }
