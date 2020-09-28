@@ -55,7 +55,7 @@ const NavSection = styled.section`
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     flex-flow: column nowrap;
     justify-content: flex-start;
-    background-color: ${(props) => props.theme.colors.mainRed};
+    background-color: ${(props) => props.theme.colors.dimmedBlue};
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
     top: 0;

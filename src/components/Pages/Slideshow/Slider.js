@@ -43,11 +43,12 @@ const SliderContainer = styled.div`
         width: 100%;
         height: 100%;
         padding: 8px 12px;
+        
+        text-align: center;
 
         color: ${(props) => props.theme.colors.white};
         font-size: ${(props) => props.theme.fontSizes.h1};
         font-family: ${(props) => props.theme.fontStyles.lobster};
-        
       }
     }
   }
@@ -59,50 +60,56 @@ const SliderContainer = styled.div`
     position: absolute;
     width: 100%;
     height: 50px;
-    
 
     .dot {
-    cursor: pointer;
-    height: 25px;
-    width: 25px;
-    margin: 0 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-    
+      cursor: pointer;
+      height: 25px;
+      width: 25px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+      background-color: #717171;
+    }
   }
 
-  .active,
-  .dot:hover {
-    background-color: #717171;
-  }
-  }
+  .ArrowContainer {
 
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
+    display: flex;
+    align-items: center;
     position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    font-size: 50px;
-    
+    width: 100%;
+    height: 100%;
+
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      
+      width: auto;
+      
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      font-size: 50px;
+    }
   }
 
   /* Position the "next button" to the right */
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
-    
   }
 
   /* On hover, add a black background color with a little bit see-through */
@@ -112,7 +119,6 @@ const SliderContainer = styled.div`
   }
 
   /* The dots/bullets/indicators */
-  
 
   /* Fading animation */
   .fade {
@@ -139,6 +145,31 @@ const SliderContainer = styled.div`
       opacity: 1;
     }
   }
+
+  @media ${({ theme }) => theme.mediaQueries.bellow768} {
+    .slideshow-container {
+      figure {
+        figcaption {
+          font-size: ${(props) => props.theme.fontSizes.extraLarge};
+        }
+      }
+      .ArrowContainer{
+        display: none;
+      }
+    }
+  }
+  @media ${({ theme }) => theme.mediaQueries.bellow500} {
+    .slideshow-container {
+      figure {
+        figcaption {
+          font-size: ${(props) => props.theme.fontSizes.large};
+        }
+      }
+      .dotContainer {
+        display: none;
+      }
+    }
+  }
 `;
 
 const SlideshowStatic = () => {
@@ -161,21 +192,24 @@ const SlideshowStatic = () => {
         </figure>
         <figure className="mySlides fade">
           <img src={slide2} alt="Billede af brød" />
-          <figcaption className="text">Vi elsker at lave brød</figcaption>
+          <figcaption className="text">
+            Vi har altid frisk brød klar til dig
+          </figcaption>
         </figure>
         <figure className="mySlides fade">
           <img src={slide3} alt="Billede af brød" />
-          <figcaption className="text">Vi elsker at lave brød</figcaption>
+          <figcaption className="text">
+            Vores brød er håndlavet fra bunden
+          </figcaption>
         </figure>
 
-        <div>
+        <div className="ArrowContainer">
           <span className="prev">&#10094;</span>
           <span className="next">&#10095;</span>
         </div>
-        
 
         <div className="dotContainer">
-        <span className="dot dot1" onclick="currentSlide(1)"></span>
+          <span className="dot dot1" onclick="currentSlide(1)"></span>
           <span className="dot dot2" onclick="currentSlide(2)"></span>
           <span className="dot dot3" onclick="currentSlide(3)"></span>
         </div>

@@ -9,6 +9,7 @@ const StyledBurger = styled.div`
   height: 30px;
   position: fixed;
   right: 0;
+  cursor: pointer;
 
   
   /* top: 20px;
@@ -26,12 +27,12 @@ const StyledBurger = styled.div`
   div {
     width: 40px;
     height: 4px;
-    background-color: ${({ open }) => (open ? "#ccc" : "#333")};
+    background-color: ${({ open }) => (open ? "#fff" : "#fff")};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
-    background-color: ${(props) => props.theme.colors.white};
     margin-right: 20px;
+   
 
     &:nth-child(1) {
       transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
