@@ -23,7 +23,7 @@ ReactDOM.render(
           <GlobalStyles />
 
           <Route exact path="*/admin/*" component={AdminApp} />
-          <Route exact path="/" component={App} />
+          <Route path="/" component={App} />
 
         </ThemeProvider>
       </Switch>

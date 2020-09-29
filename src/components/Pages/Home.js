@@ -14,6 +14,8 @@ const StyledMain = styled.main`
     min-height: auto;
     /* background-color: violet; */
     margin: 0 auto;
+
+    
 `
 
 const Home = () => {

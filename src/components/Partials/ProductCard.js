@@ -4,7 +4,7 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 
 // Icons
-import { FaRegComments } from "react-icons/fa";
+import { FaRegHeart, FaRegComments } from "react-icons/fa";
 
 //Styling
 const NewProductContainer = styled.article`
@@ -27,18 +27,39 @@ const NewProductContainer = styled.article`
     }
   }
 
-  div {
+  .komentarLikeContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+    text-align: center;
+    padding: 10px;
+    font-size: ${(props) => props.theme.fontSizes.p};
+    color: ${(props) => props.theme.colors.infoText};
+
+    div {
+      display: flex;
+
+      p {
+        margin: 0 3px;
+      }
+    }
+  }
+
+  .ProductInfoTextContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 30px;
+    /* background-color: firebrick; */
 
     h3 {
       font-size: ${(props) => props.theme.fontSizes.medium};
       text-transform: ${(props) => props.theme.fontStyles.uppercase};
       color: ${(props) => props.theme.colors.textBlue};
-      margin-top: 30px;
     }
 
     p {
@@ -82,9 +103,9 @@ const NewProductContainer = styled.article`
     figure {
       img {
         width: 100%;
-        
+
         height: 300px;
-        
+
         object-fit: cover;
       }
     }
@@ -95,24 +116,30 @@ const ProductCard = (props) => {
   return (
     <NewProductContainer>
       <figure>
-        <img src={"http://localhost:5033/images/" + props.n.image} alt="" />
+        <img src={"http://localhost:5033/images/" + props.p.image} alt="" />
       </figure>
-      <div>
-        <p>23</p>
-        <FaRegComments />
+      <div className="komentarLikeContainer">
+        <div>
+          <p>{props.p.likes}</p>
+          <FaRegHeart />
+        </div>
+        <div>
+          <p>{props.p.kommentar.length}</p>
+          <FaRegComments />
+        </div>
       </div>
-      <div>
-        <h3>{props.n.titel}</h3>
+      <div className="ProductInfoTextContainer">
+        <h3>{props.p.titel}</h3>
       </div>
-      <div>
+      <div className="ProductInfoTextContainer">
         <p>
-          {props.n.teaser.length > 90
-            ? parse(props.n.teaser.substr(0, 90) + "...")
-            : parse(props.n.teaser)}
+          {props.p.teaser.length > 90
+            ? parse(props.p.teaser.substr(0, 90) + "...")
+            : parse(props.p.teaser)}
         </p>
       </div>
       <div className="ProduktLinkContainer">
-        <Link to="/">Se Mere</Link>
+        <Link to={"/produkter/" + props.p._id}>Se Mere</Link>
       </div>
     </NewProductContainer>
   );

@@ -12,6 +12,7 @@ const StyledFooter = styled.footer`
   width: 100%;
   min-height: 250px;
   background-color: ${(props) => props.theme.colors.darkGrey};
+  margin-top: 100px;
 
   .arrowLinkTop {
     display: flex;
@@ -72,7 +73,7 @@ const StyledFooter = styled.footer`
 const Footer = () => {
   return (
     <StyledFooter>
-      <a href="#slider" className="arrowLinkTop">
+      <a href="#scroll-top" className="arrowLinkTop">
         <IoIosArrowDropupCircle />
       </a>
       <div>

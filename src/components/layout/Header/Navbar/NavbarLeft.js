@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 // import NavbarSearch from "./NavbarSearch";
 
@@ -104,10 +104,10 @@ const NavbarLeft = ({ open }) => {
     <NavSection open={open}>
       <ul>
         <li>
-          <Link to="/">Forside</Link>
+          <NavLink to="/">Forside</NavLink>
         </li>
         <li>
-          <Link to="/Produkter">Produkter</Link>
+          <NavLink to="/produkter">Produkter</NavLink>
         </li>
       </ul>
       <Link to="/" className="hideLogo">
@@ -116,10 +116,10 @@ const NavbarLeft = ({ open }) => {
 
       <ul>
         <li>
-          <Link to="/Kontakt">Kontakt</Link>
+          <NavLink to="/Kontakt">Kontakt</NavLink>
         </li>
         <li className="li-removeBorder">
-          <Link to="/Login">Login</Link>
+          <NavLink to="/Login">Login</NavLink>
         </li>
       </ul>
     </NavSection>

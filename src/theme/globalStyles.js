@@ -13,6 +13,10 @@ html{
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #F7F7F7;
+}
+
 `;
 
 export default GlobalStyle;

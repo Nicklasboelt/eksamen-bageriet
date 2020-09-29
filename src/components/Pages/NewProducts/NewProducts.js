@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ProductCard from "../../Partials/ProductCard";
 
 // api - kald
-import { hentAntalNyeProdukter } from "../../helpers/API/NewProductsAPI";
+import { hentAntalNyeProdukter } from "../../helpers/API/ProductsAPI";
 
 // Styling
 const NewProductsContainer = styled.section`
@@ -67,7 +67,7 @@ const NewProducts = () => {
   if (nyeProdukter && nyeProdukter.length) {
     produktliste = nyeProdukter.map((n) => {
       return (
-        <ProductCard key={n._id} n={n} />
+        <ProductCard key={n._id} p={n} />
       );
     });
   }
