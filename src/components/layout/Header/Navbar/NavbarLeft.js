@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
-// import NavbarSearch from "./NavbarSearch";
+import NavbarSearch from "./NavbarSearch";
 
 const NavSection = styled.section`
   display: flex;
@@ -29,7 +29,17 @@ const NavSection = styled.section`
     list-style: none;
     justify-content: center;
     margin: 0 100px;
+
+    
   }
+
+  div {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      height: 50px;
+      background-color: cornflowerblue;
+    }
 
   li {
     display: flex;
@@ -121,7 +131,9 @@ const NavbarLeft = ({ open }) => {
         <li className="li-removeBorder">
           <NavLink to="/Login">Login</NavLink>
         </li>
+        
       </ul>
+      <NavbarSearch />
     </NavSection>
   );
 };

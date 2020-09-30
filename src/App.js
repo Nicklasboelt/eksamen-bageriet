@@ -9,9 +9,12 @@ import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Pages/Home";
 import Produkter from "./components/Pages/ProduktPage/Produkter";
 import Produkt from "./components/Pages/ProduktPage/Produkt";
+import Kontakt from "./components/Pages/Kontakt/Kontakt";
+import Soegeresultat from './components/Pages/Soegeresultat/Soegeresultat'
 
 // CSS - Font
 import './theme/font.css'
+
 
 
 
@@ -22,11 +25,23 @@ function App() {
       
         <Header />
         <div id="scroll-top"></div>
+
+        
         
         {/* Routing */}
+
+        {/* Søgeresultat */}
+        <Route exact path="/soeg/:soegeordet?" component={Soegeresultat} />
+
+        {/* Home */}
         <Route exact path="/" component={Home} />
+
+        {/* Produkter */}
         <Route exact path="/produkter" component={Produkter} />
         <Route exact path="/produkter/:produktid" component={Produkt} />
+
+        {/* Kontakt */}
+        <Route exact path="/kontakt" component={Kontakt} />
 
         <Footer />
 
