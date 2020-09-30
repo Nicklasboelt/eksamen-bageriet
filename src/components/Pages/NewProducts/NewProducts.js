@@ -15,6 +15,7 @@ const NewProductsContainer = styled.section`
   width: 100%;
   height: auto;
   /* background-color: honeydew; */
+  margin-bottom: 100px;
 
   header {
     width: 100%;

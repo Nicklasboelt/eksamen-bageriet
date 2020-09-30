@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 // Providers
 import { ThemeProvider } from "styled-components";
+import AuthDataProvider from "./components/context/AuthDataContext";
 
 // Pages
 import App from "./App";
@@ -20,11 +21,12 @@ ReactDOM.render(
     <Router>
       <Switch>
         <ThemeProvider theme={Theme}>
-          <GlobalStyles />
+          <AuthDataProvider>
+            <GlobalStyles />
 
-          <Route exact path="*/admin/*" component={AdminApp} />
-          <Route path="/" component={App} />
-
+            <Route exact path="*/admin/*" component={AdminApp} />
+            <Route path="/" component={App} />
+          </AuthDataProvider>
         </ThemeProvider>
       </Switch>
     </Router>

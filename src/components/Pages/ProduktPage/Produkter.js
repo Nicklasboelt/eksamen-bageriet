@@ -111,6 +111,7 @@ const ProductsMain = styled.main`
       flex-flow: row wrap;
       width: 100%;
       height: auto;
+      margin-bottom: 100px;
     }
 
     @media ${({ theme }) => theme.mediaQueries.bellow768} {

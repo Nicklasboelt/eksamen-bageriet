@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // api - kald
@@ -40,7 +40,7 @@ const KontaktMain = styled.main`
     width: 100%;
     height: 500px;
 
-    margin-top: 50px;
+    margin: 50px 0 100px 0;
 
     form {
       display: flex;

@@ -9,6 +9,8 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position:absolute;
+   bottom:0;
   width: 100%;
   min-height: 250px;
   background-color: ${(props) => props.theme.colors.darkGrey};

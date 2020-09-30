@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import NavbarSearch from "./NavbarSearch";
 
+// context
+import { AuthDataContext } from "../../../context/AuthDataContext";
+
+// Styling
 const NavSection = styled.section`
   display: flex;
   justify-content: center;
@@ -29,17 +33,15 @@ const NavSection = styled.section`
     list-style: none;
     justify-content: center;
     margin: 0 100px;
-
-    
   }
 
   div {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-      height: 50px;
-      background-color: cornflowerblue;
-    }
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 50px;
+    background-color: cornflowerblue;
+  }
 
   li {
     display: flex;
@@ -110,6 +112,8 @@ const NavSection = styled.section`
 `;
 
 const NavbarLeft = ({ open }) => {
+  const { loggedIn } = useContext(AuthDataContext);
+
   return (
     <NavSection open={open}>
       <ul>
@@ -128,10 +132,15 @@ const NavbarLeft = ({ open }) => {
         <li>
           <NavLink to="/Kontakt">Kontakt</NavLink>
         </li>
-        <li className="li-removeBorder">
-          <NavLink to="/Login">Login</NavLink>
-        </li>
-        
+        {!loggedIn ? (
+          <li className="li-removeBorder">
+            <NavLink to="/Login">Login</NavLink>
+          </li>
+        ) : (
+          <li className="li-removeBorder">
+            <NavLink to="/Logout">Logout</NavLink>
+          </li>
+        )}
       </ul>
       <NavbarSearch />
     </NavSection>

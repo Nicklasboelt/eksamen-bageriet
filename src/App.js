@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Route } from "react-router-dom";
 
 // Layout
@@ -12,16 +12,37 @@ import Produkt from "./components/Pages/ProduktPage/Produkt";
 import Kontakt from "./components/Pages/Kontakt/Kontakt";
 import Soegeresultat from './components/Pages/Soegeresultat/Soegeresultat'
 
+// Auth
+import Login from "./components/auth/Login";
+import Logout from "./components/auth/Logout";
+import OpretBruger from "./components/auth/OpretBruger";
+
+
+// context
+import { AuthDataContext } from './components/context/AuthDataContext'
+
 // CSS - Font
 import './theme/font.css'
+import styled from 'styled-components'
 
 
+const AppContainer = styled.div`
+position: relative;
+  min-height: 100vh;
+
+  .contentWrapper {
+    padding-bottom: 250px;
+  }
+`
 
 
 function App() {
-  return (
-    <div className="App">
 
+  const {loggedIn} = useContext(AuthDataContext)
+
+  return (
+    <AppContainer className="App">
+      <div className="contentWrapper">
       
         <Header />
         <div id="scroll-top"></div>
@@ -30,7 +51,10 @@ function App() {
         
         {/* Routing */}
 
-        {/* Søgeresultat */}
+        {/* Søg og login */}
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/Logout" component={Logout} />
+        <Route exact path="/Opretbruger" component={OpretBruger} />
         <Route exact path="/soeg/:soegeordet?" component={Soegeresultat} />
 
         {/* Home */}
@@ -42,10 +66,11 @@ function App() {
 
         {/* Kontakt */}
         <Route exact path="/kontakt" component={Kontakt} />
+        </div>
 
         <Footer />
 
-    </div>
+    </AppContainer>
   );
 }
 
