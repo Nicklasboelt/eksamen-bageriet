@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 // import parse from "html-react-parser";
 import dayjs from "dayjs";
 
+// context
+import { AuthDataContext } from "../../context/AuthDataContext";
+
 // api - kald
-import { hentUdvalgtProdukt, likeProdukt } from "../../helpers/API/ProductsAPI";
+import {
+  hentUdvalgtProdukt,
+  likeProdukt,
+  opretKommentar,
+} from "../../helpers/API/ProductsAPI";
 
 // Icons
 import { FiHeart } from "react-icons/fi";
@@ -209,11 +216,8 @@ const ProductMain = styled.main`
       display: flex;
       width: 100%;
       height: 50px;
-      padding-left: 30px;
 
-      border: 1px solid ${(props) => props.theme.colors.infoText};
       margin: 10px 0;
-      background-color: ${(props) => props.theme.colors.white};
 
       .iconInputContainer {
         display: flex;
@@ -221,20 +225,38 @@ const ProductMain = styled.main`
         height: auto;
         div {
           display: flex;
+          justify-content: center;
           align-items: center;
-          min-width: 30px;
-          height: 50px;
+          min-width: 50px;
+          height: 100%;
           color: ${(props) => props.theme.colors.textBlue};
           font-size: 19px;
+          background-color: ${(props) => props.theme.colors.white};
+          border-left: 1px solid ${(props) => props.theme.colors.infoText};
+          border-top: 1px solid ${(props) => props.theme.colors.infoText};
+          border-bottom: 1px solid ${(props) => props.theme.colors.infoText};
         }
       }
 
-      input {
-        width: 100%;
+      .titleInput {
+        width: 30%;
         border: none;
         outline: none;
         font-size: 20px;
         color: ${(props) => props.theme.colors.textBlue};
+        border-right: 1px solid ${(props) => props.theme.colors.infoText};
+        border-top: 1px solid ${(props) => props.theme.colors.infoText};
+        border-bottom: 1px solid ${(props) => props.theme.colors.infoText};
+      }
+      .kommentarInput {
+        width: 70%;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        color: ${(props) => props.theme.colors.textBlue};
+        margin-left: 10px;
+        border: 1px solid ${(props) => props.theme.colors.infoText};
+        padding-left: 10px;
       }
       button {
         min-width: 150px;
@@ -258,6 +280,7 @@ const ProductMain = styled.main`
       flex-direction: column;
       width: 100%;
       height: auto;
+      margin-bottom: 100px;
 
       article {
         display: flex;
@@ -355,9 +378,12 @@ const ProductMain = styled.main`
         height: auto;
         padding: 0;
         .iconInputContainer {
+          min-height: 50px;
+          margin-bottom: 10px;
           div {
             justify-content: center;
             min-width: 50px;
+            min-height: 50px;
           }
         }
       }
@@ -423,6 +449,30 @@ const ProductMain = styled.main`
         }
       }
     }
+
+    .kommentarSection {
+      form {
+        .iconInputContainer {
+          flex-wrap: wrap;
+          min-height: 50px;
+          margin-bottom: 10px;
+          div {
+            justify-content: center;
+            min-width: 50px;
+            min-height: 50px;
+          }
+
+          .titleInput {
+            width: 80%;
+          }
+          .kommentarInput {
+            width: 100%;
+            min-height: 50px;
+            margin: 10px 0;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -432,6 +482,9 @@ const Produkt = () => {
   const [produktet, setProduktet] = useState({});
   const [produktLiket, setProduktLiket] = useState(false);
 
+  // context
+  const { brugerData } = useContext(AuthDataContext);
+
   useEffect(() => {
     hentUdvalgtProdukt(produktid).then(setProduktet);
   }, [produktid]);
@@ -439,6 +492,21 @@ const Produkt = () => {
   const handleOnclick = () => {
     likeProdukt(produktid);
     setProduktLiket(true);
+  };
+
+  //----------- Handle Submit -----------------
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let kommentar = {
+      titel: e.target.titel.value,
+      kommentaren: e.target.kommentaren.value,
+      bruger: brugerData.bruger_id,
+      produkt: produktid,
+    };
+    console.log(kommentar);
+
+    opretKommentar(kommentar);
   };
 
   //----------- KommentarListe -----------------
@@ -521,15 +589,26 @@ const Produkt = () => {
             <FaRegComments className="kommentarIcon" />
           </figure>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="iconInputContainer">
             <div>
               <FaPencilAlt />
             </div>
 
-            <input placeholder="fortæl os hvad du synes...." />
+            <input
+              type="text"
+              name="titel"
+              className="titleInput"
+              placeholder="Titel..."
+            />
+            <input
+              type="text"
+              name="kommentaren"
+              className="kommentarInput"
+              placeholder="fortæl os hvad du synes...."
+            />
           </div>
-          <button>Indsæt</button>
+          <button type="submit">Indsæt</button>
         </form>
 
         <section>{kommentarliste}</section>

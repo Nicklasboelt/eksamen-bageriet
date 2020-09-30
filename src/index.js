@@ -26,6 +26,7 @@ ReactDOM.render(
 
             <Route exact path="*/admin/*" component={AdminApp} />
             <Route path="/" component={App} />
+
           </AuthDataProvider>
         </ThemeProvider>
       </Switch>

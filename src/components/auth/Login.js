@@ -120,11 +120,26 @@ const LoginMain = styled.main`
 `;
 
 const Login = () => {
-  const { onLogin} = useContext(AuthDataContext);
-  const { loggedIn} = useContext(AuthDataContext);
-  const [bruger, setBruger] = useState();
+  const { onLogin } = useContext(AuthDataContext);
+  const { loggedIn, brugerData} = useContext(AuthDataContext);
+  // const [bruger, setBruger] = useState();
 
   console.log(loggedIn)
+
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+
+  //   console.log(e.target.email.value, e.target.password.value);
+
+  //   login({
+  //     email: e.target.email.value,
+  //     password: e.target.password.value,
+  //   }).then((data) => {
+  //     console.log("LOGIN Her", data);
+  //     setBruger(data);
+  //     onLogin(data);
+  //   });
+  // };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -136,8 +151,8 @@ const Login = () => {
       password: e.target.password.value,
     }).then((data) => {
       console.log("LOGIN Her", data);
-      setBruger(data);
       onLogin(data);
+      
     });
   };
 
@@ -165,7 +180,7 @@ const Login = () => {
 
           <button type="submit">Login</button> 
         </div>
-      </form> </> : <header><h2>Du er logget ind som brugeren {bruger.brugernavn}</h2></header>  }
+      </form> </> : <header><h2>Du er logget ind som brugeren {brugerData.brugernavn}</h2></header>  }
     </LoginMain>
   );
 };

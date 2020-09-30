@@ -2,6 +2,7 @@ import axios from "axios";
 
 const ProdukterAPI = {
   baseUrl: "http://localhost:5033/produkter",
+  kommentarUrl: "http://localhost:5033/kommentar",
   // secondUrl: "http://localhost:5021/event",
 };
 
@@ -48,3 +49,12 @@ export const likeProdukt = async (id) => {
       console.log("Kan ikke like produktet", error)
   }
 }
+
+//--------------- Kommentar -----------------
+// POST kommentar
+export const opretKommentar = async (kommentar) => {
+
+
+  let response = await axios.post(ProdukterAPI.kommentarUrl + "/admin", kommentar);
+  return response.data; //output
+};
