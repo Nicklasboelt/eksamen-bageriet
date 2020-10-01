@@ -9,7 +9,7 @@ const SoegeMain = styled.main`
   max-width: 1200px;
   height: auto;
   /* background-color: violet; */
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
 
   header {
     width: 100%;

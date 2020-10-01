@@ -259,7 +259,7 @@ const Kontakt = () => {
               <p>Emne: {kontaktInfo.emne}</p>
             </div>
             <div>
-              <p>Beksed: {kontaktInfo.besked}</p>
+              <p>Besked: {kontaktInfo.besked}</p>
             </div>
           </section>
         )}

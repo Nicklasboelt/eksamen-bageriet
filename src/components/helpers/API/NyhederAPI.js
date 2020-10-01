@@ -37,13 +37,46 @@ export const hentUdvalgtNyhed = async (id) => {
 }
 
 // Ret en eksisterende nyhed
-export const retNyhed = async (id, nyhed) => {
+export const retNyhed = async (id, nyheddata, billeddata) => {
 
   try{
-      let res = await axios.put(nyhederAPI.baseUrl + "/admin/" + id, nyhed);
+      const formdata = new FormData();
+        formdata.append('nyhed', JSON.stringify (nyheddata))
+        formdata.append('image', billeddata)
+
+      let res = await axios.put(nyhederAPI.baseUrl + "/admin/" + id, formdata);
       return res.data;
   }
   catch(error) {
+      console.log(error)
+  }
+}
+
+// Opret nyhed
+export const opretNyhed = async (nyheddata, billeddata) => {
+  try{
+
+      
+      const formdata = new FormData();
+      formdata.append('nyhed', JSON.stringify (nyheddata)) 
+      formdata.append('image', billeddata)
+
+      let res = await axios.post(nyhederAPI.baseUrl + "/admin", formdata);
+      return res.data;
+  }
+  catch(error) {
+      console.log(error)
+  }
+}
+
+// Slet nyhed
+export const sletNyhed = async (id) => {
+  try {
+      
+      let res = await axios.delete(nyhederAPI.baseUrl + "/admin/" + id)
+      return res.data
+
+  } catch (error) {
       console.log(error)
   }
 }

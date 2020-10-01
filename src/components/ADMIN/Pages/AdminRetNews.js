@@ -30,19 +30,18 @@ const RetNyhedAdminSection = styled.section`
     height: auto;
 
     figure {
-    width: 100%;
-    height: auto;
-    text-align: center;
-    overflow: hidden;
-    
+      width: 100%;
+      height: auto;
+      text-align: center;
+      overflow: hidden;
 
-    img {
-      width: 400px;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 5px;
+      img {
+        width: 400px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
     }
-  }
 
     label {
       font-family: ${(props) => props.theme.fontStyles.openSemiBold};
@@ -69,7 +68,7 @@ const RetNyhedAdminSection = styled.section`
       padding: 10px 0 0 20px;
       border: none;
       outline: none;
-      font-size: 17px;
+      font-size: 20px;
       color: ${(props) => props.theme.colors.textBlue};
     }
 
@@ -135,6 +134,7 @@ const RetNyhedAdminSection = styled.section`
 const AdminRetNews = () => {
   const [nyhed, setNyhed] = useState({});
   const [nyhedbillede, setNyhedbillede] = useState();
+  const [rettet, setRettet] = useState(false);
   const history = useHistory();
   const { newsid } = useParams();
 
@@ -152,74 +152,90 @@ const AdminRetNews = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    retNyhed(newsid, nyhed, nyhedbillede).then((data) => {
-      console.log(data);
-      history.push("/admin/adminnews");
-    });
+    retNyhed(newsid, nyhed, nyhedbillede).then(setRettet(true));
   };
 
   return (
     <RetNyhedAdminSection>
-      <header>
-        <h2>Ret Nyhed</h2>
-      </header>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="inpTitel">Indtast opskriftens titel</label>
-        <input
-          type="text"
-          name="titel"
-          placeholder="Titel..."
-          required
-          id="inpTitel"
-          defaultValue={nyhed.titel}
-          onChange={(e) => setNyhed({ ...nyhed, titel: e.target.value })}
-        />
-        <label htmlFor="inpTeaser">Indtast opskriftens teaser</label>
-        <textarea
-          type="text"
-          name="teaser"
-          placeholder="Teaser..."
-          required
-          id="inpTeaser"
-          defaultValue={nyhed.teaser}
-          onChange={(e) => setNyhed({ ...nyhed, titel: e.target.value })}
-        />
-        <label htmlFor="inpNyhedsTekst">Indtast opskriftens teaser</label>
-        <textarea
-          type="text"
-          name="nyhedstekst"
-          placeholder="Nyhedstekst..."
-          required
-          id="inpNyhedsTekst"
-          defaultValue={nyhed.nyhedstekst}
-          onChange={(e) => setNyhed({ ...nyhed, titel: e.target.value })}
-        />
+      {!rettet ? (
+        <>
+          <header>
+            <h2>Ret Nyhed</h2>
+          </header>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="inpTitel">Indtast nyhedens titel</label>
+            <input
+              type="text"
+              name="titel"
+              placeholder="Titel..."
+              required
+              id="inpTitel"
+              defaultValue={nyhed.titel}
+              onChange={(e) => setNyhed({ ...nyhed, titel: e.target.value })}
+            />
+            <label htmlFor="inpTeaser">Indtast nyhedens teaser</label>
+            <textarea
+              type="text"
+              name="teaser"
+              placeholder="Teaser..."
+              required
+              id="inpTeaser"
+              defaultValue={nyhed.teaser}
+              onChange={(e) => setNyhed({ ...nyhed, teaser: e.target.value })}
+            />
+            <label htmlFor="inpNyhedsTekst">Indtast nyhedens beskrivelse</label>
+            <textarea
+              type="text"
+              name="nyhedstekst"
+              placeholder="Nyhedstekst..."
+              required
+              id="inpNyhedsTekst"
+              defaultValue={nyhed.nyhedstekst}
+              onChange={(e) =>
+                setNyhed({ ...nyhed, nyhedstekst: e.target.value })
+              }
+            />
 
-        <figure>
-          <img
-            src={"http://localhost:5033/images/" + nyhed.image}
-            alt={nyhed.titel}
-          />
-        </figure>
+            <figure>
+              <img
+                src={"http://localhost:5033/images/" + nyhed.image}
+                alt={nyhed.titel}
+              />
+            </figure>
 
-        <ImageUploader
-          withIcon={true}
-          buttonText="Vælg et billede"
-          withLabel={true}
-          imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
-          singleImage={true}
-          withPreview={true}
-          maxFileSize={5242880}
-          required={true}
-          onChange={(image) => {
-            setNyhedbillede(image[0]);
-          }}
-        />
-        <div className="RetNyhedButtonsContainer">
-          <button className="FortrydNyhedButton" onClick={() => {history.push('/admin/adminnews')}}>Fortryd</button>
-          <button className="GemNyhedButton" type="submit">Gem</button>
-        </div>
-      </form>
+            <ImageUploader
+              withIcon={true}
+              buttonText="Vælg et billede"
+              withLabel={true}
+              imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
+              singleImage={true}
+              withPreview={true}
+              maxFileSize={5242880}
+              required={true}
+              onChange={(image) => {
+                setNyhedbillede(image[0]);
+              }}
+            />
+            <div className="RetNyhedButtonsContainer">
+              <button
+                className="FortrydNyhedButton"
+                onClick={() => {
+                  history.push("/admin/adminnews");
+                }}
+              >
+                Fortryd
+              </button>
+              <button className="GemNyhedButton" type="submit">
+                Gem
+              </button>
+            </div>
+          </form>
+        </>
+      ) : (
+        <header>
+          <h2>Nyheden er rettet!</h2>
+        </header>
+      )}
     </RetNyhedAdminSection>
   );
 };

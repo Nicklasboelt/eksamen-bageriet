@@ -26,13 +26,40 @@ const AdminNewsContainer = styled.section`
     }
   }
 
+  .OpretNyhedButtonContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    /* background-color: yellow; */
+    margin-top: 10px;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 100%;
+      color: ${(props) => props.theme.colors.white};
+      background-color: ${(props) => props.theme.colors.textBlue};
+      font-size: 20px;
+      font-family: ${(props) => props.theme.fontStyles.openSans};
+      text-decoration: none;
+      transition: all 0.5s;
+    }
+
+    a:hover {
+      background-color: #798b96;
+    }
+  }
+
   .AdminNewsArticleContainer {
     display: flex;
     justify-content: space-around;
     flex-flow: row wrap;
     width: 100%;
     height: auto;
-    margin-top: 100px;
+    margin-top: 30px;
 
     article {
       display: flex;
@@ -142,10 +169,10 @@ const AdminNews = () => {
           </div>
           <div className="RetSletButtonContainer">
             <div>
-              <Link to={"/admin/adminnews/" + n._id}>Ret Nyheden</Link>
+              <Link to={"/admin/newsret/" + n._id}>Ret Nyheden</Link>
             </div>
             <div>
-              <Link>Slet Nyheden</Link>
+              <Link to={"/admin/newsslet/" + n._id}>Slet Nyheden</Link>
             </div>
           </div>
         </article>
@@ -155,6 +182,13 @@ const AdminNews = () => {
 
   return (
     <AdminNewsContainer>
+      <header>
+        <h2>Nyheder</h2>
+      </header>
+      <div className="OpretNyhedButtonContainer">
+        <Link to="/admin/opretnews">Opret Nyhed</Link>
+      </div>
+
       <div className="AdminNewsArticleContainer">{nyhedsliste}</div>
     </AdminNewsContainer>
   );

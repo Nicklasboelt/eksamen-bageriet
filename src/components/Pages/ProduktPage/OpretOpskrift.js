@@ -62,7 +62,7 @@ const OpretOpskriftMain = styled.main`
       padding: 10px 0 0 20px;
       border: none;
       outline: none;
-      font-size: 17px;
+      font-size: 20px;
       color: ${(props) => props.theme.colors.textBlue};
     }
 

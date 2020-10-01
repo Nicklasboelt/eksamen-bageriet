@@ -6,7 +6,7 @@ const AdminNavbarContainer = styled.nav`
   display: flex;
   width: 100%;
   min-height: 50px;
-  background-color: firebrick;
+  /* background-color: firebrick; */
 
   ul {
       display: flex;
