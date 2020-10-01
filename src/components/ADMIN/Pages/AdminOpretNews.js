@@ -1,11 +1,11 @@
 import React from 'react'
 
-const AdminApp = () => {
+const AdminOpretNews = () => {
     return (
         <div>
-            ADMIN
+            
         </div>
     )
 }
 
-export default AdminApp
+export default AdminOpretNews

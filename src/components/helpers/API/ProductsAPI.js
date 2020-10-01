@@ -50,10 +50,43 @@ export const likeProdukt = async (id) => {
   }
 }
 
+// // POST opret produkt
+// export const opretProdukt = async (nytprodukt, image) => {
+//   // let brugerobjekt = Object.fromEntries(new FormData(nybruger))
+
+//   // const formdata = new FormData();
+//   // formdata.append("image", image);
+//   // formdata.append("produkt", nytprodukt)
+
+//   console.log("API", nytprodukt)
+
+// //   const formdata = new FormData();
+// //   formdata.append("bruger", JSON.stringify(nybruger));
+
+//   let response = await axios.post(ProdukterAPI.baseUrl + "/admin", nytprodukt);
+//   return response.data; //output
+// };
+
+// POST opret produkt
+export const opretProdukt = async (nytprodukt, image) => {
+  // let brugerobjekt = Object.fromEntries(new FormData(nybruger))
+
+  const formdata = new FormData();
+  formdata.append("image", image);
+  
+
+  console.log("API", nytprodukt)
+
+//   const formdata = new FormData();
+//   formdata.append("bruger", JSON.stringify(nybruger));
+
+  let response = await axios.post(ProdukterAPI.baseUrl + "/admin", nytprodukt, formdata);
+  return response.data; //output
+};
+
 //--------------- Kommentar -----------------
 // POST kommentar
 export const opretKommentar = async (kommentar) => {
-
 
   let response = await axios.post(ProdukterAPI.kommentarUrl + "/admin", kommentar);
   return response.data; //output

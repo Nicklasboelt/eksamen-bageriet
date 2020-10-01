@@ -314,6 +314,8 @@ const ProductMain = styled.main`
     }
   }
 
+
+  /*--------------------------------Media Queries------------------------------------*/
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     article {
       align-items: center;
@@ -476,6 +478,7 @@ const ProductMain = styled.main`
   }
 `;
 
+  // Component ------------------------------------------
 const Produkt = () => {
   // State og Funktioner------------------------------------------
   const { produktid } = useParams();
@@ -484,6 +487,7 @@ const Produkt = () => {
 
   // context
   const { brugerData } = useContext(AuthDataContext);
+  
 
   useEffect(() => {
     hentUdvalgtProdukt(produktid).then(setProduktet);
@@ -530,7 +534,7 @@ const Produkt = () => {
 
   if (produktet.ingredienser && produktet.ingredienser.length) {
     ingrediensliste = produktet.ingredienser.map((i) => {
-      return <li key={i._id}>{i.ingrediens_titel}</li>;
+      return <li key={i._id}>{i.ingrediens_titel} {i.maengde} {i.enhed_forkortet}</li>;
     });
   }
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import $ from "jquery";
 import styled from "styled-components";
 
@@ -8,6 +9,9 @@ import ProductCard from "../../Partials/ProductCard";
 // api - kald
 import { hentAlleProdukter } from "../../helpers/API/ProductsAPI";
 import { hentKategorier } from "../../helpers/API/KategorierAPI";
+
+// context
+import { AuthDataContext } from "../../context/AuthDataContext";
 
 // Styling
 const ProductsMain = styled.main`
@@ -56,6 +60,30 @@ const ProductsMain = styled.main`
     font-size: ${(props) => props.theme.fontSizes.large};
     color: ${(props) => props.theme.colors.textBlue};
     text-transform: ${(props) => props.theme.fontStyles.uppercase};
+  }
+
+  .opretOpskriftContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 91%;
+    height: auto;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      min-height: 50px;
+      color: ${(props) => props.theme.colors.white};
+      font-size: 20px;
+      font-family: ${(props) => props.theme.fontStyles.openSans};
+      text-decoration: none;
+      background-color: ${(props) => props.theme.colors.textBlue};
+      transition: all 0.5s;
+    }
+    a:hover {
+      background-color: #798b96;
+    }
   }
 
   .allProductsContainer {
@@ -157,6 +185,21 @@ const ProductsMain = styled.main`
       }
     }
   }
+
+  @media ${({ theme }) => theme.mediaQueries.bellow1200} {
+    .opretOpskriftContainer {
+      justify-content: flex-start;
+      width: 100%;
+      padding-left: 20px;
+    }
+  }
+  @media ${({ theme }) => theme.mediaQueries.bellow768} {
+    .opretOpskriftContainer {
+      justify-content: center;
+      width: 100%;
+      padding-left: 20px;
+    }
+  }
 `;
 
 const Produkter = () => {
@@ -166,6 +209,9 @@ const Produkter = () => {
   const [valgtKategori, setValgtKategori] = useState(
     "5f63b9f9702cca37f87ce06f"
   );
+
+  // context
+  const { loggedIn } = useContext(AuthDataContext);
 
   // state til kategori header
   const [headerKategori, setHeaderKategori] = useState("");
@@ -229,6 +275,12 @@ const Produkter = () => {
         </div>
       </div>
       <div className="kategoriHeading">{headerKategori}</div>
+      <div className="opretOpskriftContainer">
+        {!loggedIn ? <Link to="Login">Opret Opskrift</Link> :<Link to="Opretopskrift">Opret Opskrift</Link>
+
+        }
+        
+      </div>
       <section className="allProductsContainer">
         <nav>
           <ul className="nav-list">{kategoriliste}</ul>

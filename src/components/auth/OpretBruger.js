@@ -132,60 +132,80 @@ const OpretBruger = () => {
       fornavn: e.target.fornavn.value,
       efternavn: e.target.efternavn.value,
       email: e.target.email.value,
-    //   rolle: e.target.rolle.value,
+      //   rolle: e.target.rolle.value,
       password: e.target.password.value,
-      
     };
-    console.log(bruger)
-    
-    opretBruger(bruger).then(setOprettet(true))
-    
+    console.log(bruger);
 
+    opretBruger(bruger).then(setOprettet(true));
   };
 
   console.log(Info);
-//   console.log(brugerOprettet);
+  //   console.log(brugerOprettet);
 
   return (
     <OpretbrugerMain>
-    {!oprettet ? <><header>
-        <h2>Opret Bruger</h2>
-      </header>
-      
+      {!oprettet ? (
+        <>
+          <header>
+            <h2>Opret Bruger</h2>
+          </header>
           <form onSubmit={handleSubmit}>
-        <label htmlFor="inpBrugernavn">Indtast dit brugernavn</label>
-        <input
-          type="text"
-          name="brugernavn"
-          placeholder="Brugernavn"
-          required
-          id="inpBrugernavn"
-        />
-        <label htmlFor="inpFornavn">Indtast dit fornavn</label>
-        <input type="text" name="fornavn" placeholder="Fornavn" required id="inpFornavn"/>
-        <label htmlFor="inpEfternavn">Indtast dit efternavn</label>
-        <input type="text" name="efternavn" placeholder="Efternavn" required id="inpEfternavn"/>
-        <label htmlFor="inpEmail">Indtast din e-mail</label>
-        <input type="email" name="email" placeholder="E-mail" required id="inpEmail"/>
-        {/* <input type="text" name="rolle" value="medlem" hidden required /> */}
-        <label htmlFor="inpPassword">Intast dit password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          id="inpPassword"
-        />
-        <div>
-          <div>
-            <Link to="/Login">Login</Link>
-          </div>
+            <label htmlFor="inpBrugernavn">Indtast dit brugernavn</label>
+            <input
+              type="text"
+              name="brugernavn"
+              placeholder="Brugernavn"
+              required
+              id="inpBrugernavn"
+            />
+            <label htmlFor="inpFornavn">Indtast dit fornavn</label>
+            <input
+              type="text"
+              name="fornavn"
+              placeholder="Fornavn"
+              required
+              id="inpFornavn"
+            />
+            <label htmlFor="inpEfternavn">Indtast dit efternavn</label>
+            <input
+              type="text"
+              name="efternavn"
+              placeholder="Efternavn"
+              required
+              id="inpEfternavn"
+            />
+            <label htmlFor="inpEmail">Indtast din e-mail</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              required
+              id="inpEmail"
+            />
+            {/* <input type="text" name="rolle" value="medlem" hidden required /> */}
+            <label htmlFor="inpPassword">Intast dit password (min. 6 tegn)</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+              id="inpPassword"
+            />
+            <div>
+              <div>
+                <Link to="/Login">Login</Link>
+              </div>
 
-          <button type="submit">Opret</button>
-        </div>
-      </form> </> : <header>
-        <h2>Brugeren med brugernavnet {Info.brugernavn} er oprettet</h2>
-      </header>}
+              <button type="submit">Opret</button>
+            </div>
+          </form>
+        </>
+      ) : (
+        <header>
+          <h2>Brugeren med brugernavnet {Info.brugernavn} er oprettet</h2>
+        </header>
+      )}
     </OpretbrugerMain>
   );
 };
