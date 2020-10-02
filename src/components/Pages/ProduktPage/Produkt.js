@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-// import parse from "html-react-parser";
+import parse from "html-react-parser";
 import dayjs from "dayjs";
 
 // context
@@ -553,17 +553,18 @@ const Produkt = () => {
         <header>
           <div>
             <h3>{produktet.titel}</h3>
-            <h4>Kategori</h4>
+            <h4>{!produktet.kategori ? "" : produktet.kategori.titel}</h4>
           </div>
           <div className="likeButtonContainer">
             {produktLiket ? (
               <button className="LikeActive">
-                Produktet er Liked <FaHeart className="HeartActive" />
+                Produktet er Liked {produktet.likes + 1} <FaHeart className="HeartActive" /> 
               </button>
             ) : (
               <button onClick={handleOnclick}>
-                Like!
+                Like! {produktet.likes}
                 <FiHeart className="Heart" />
+                
               </button>
             )}
           </div>
@@ -577,7 +578,7 @@ const Produkt = () => {
                 alt=""
               />
             </figure>
-            <p>{produktet.beskrivelse}</p>
+            <p>{!produktet.beskrivelse ? "" : parse(produktet.beskrivelse)}</p>
           </div>
 
           <div className="ingrediensContainer">
