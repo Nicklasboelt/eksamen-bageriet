@@ -67,22 +67,42 @@ export const likeProdukt = async (id) => {
 //   return response.data; //output
 // };
 
-// POST opret produkt
-export const opretProdukt = async (nytprodukt, image) => {
-  // let brugerobjekt = Object.fromEntries(new FormData(nybruger))
 
-  const formdata = new FormData();
-  formdata.append("image", image);
-  
 
-  console.log("API", nytprodukt)
+
+// // POST opret produkt
+// export const opretProdukt = async (nytprodukt, image) => {
+//   // let brugerobjekt = Object.fromEntries(new FormData(nybruger))
 
 //   const formdata = new FormData();
-//   formdata.append("bruger", JSON.stringify(nybruger));
+//   formdata.append("image", image);
+  
 
-  let response = await axios.post(ProdukterAPI.baseUrl + "/admin", nytprodukt, formdata);
-  return response.data; //output
-};
+//   console.log("API", nytprodukt)
+
+// //   const formdata = new FormData();
+// //   formdata.append("bruger", JSON.stringify(nybruger));
+
+//   let response = await axios.post(ProdukterAPI.baseUrl + "/admin", nytprodukt, formdata);
+//   return response.data; //output
+// };
+
+// Opret Produkt
+export const opretProdukt = async (produktdata, billeddata) => {
+  try{
+
+      
+      const formdata = new FormData();
+      formdata.append('produkt', JSON.stringify (produktdata)) 
+      formdata.append('image', billeddata)
+
+      let res = await axios.post(ProdukterAPI.baseUrl + "/admin", formdata);
+      return res.data;
+  }
+  catch(error) {
+      console.log(error)
+  }
+}
 
 //--------------- Kommentar -----------------
 // POST kommentar

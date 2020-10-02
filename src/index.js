@@ -39,6 +39,7 @@ ReactDOM.render(
           <AuthDataProvider>
             <GlobalStyles />
             <IndexContainer>
+              
               <div className="contentWrapper">
                 <Header />
                 <Route path="/" component={App} />

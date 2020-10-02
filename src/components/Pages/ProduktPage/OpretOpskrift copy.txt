@@ -16,7 +16,6 @@ const OpretOpskriftMain = styled.main`
   max-width: 1200px;
   height: auto;
   margin: 0 auto;
-  margin-bottom: 100px;
 
   header {
     width: 100%;
@@ -36,7 +35,7 @@ const OpretOpskriftMain = styled.main`
     flex-direction: column;
     width: 100%;
     height: auto;
-    
+    margin-bottom: 100px;
 
     label {
       font-family: ${(props) => props.theme.fontStyles.openSemiBold};
@@ -78,10 +77,7 @@ const OpretOpskriftMain = styled.main`
       margin: 30px 0 30px 0;
       cursor: pointer;
     }
-    
-  }
-
-  .ButtonsContainer {
+    .ButtonsContainer {
       display: flex;
       justify-content: space-between;
       width: 100%;
@@ -99,7 +95,6 @@ const OpretOpskriftMain = styled.main`
         font-family: ${(props) => props.theme.fontStyles.openSans};
         cursor: pointer;
         transition: all 0.5s;
-        
         
       }
       .opretButton:hover {
@@ -147,12 +142,13 @@ const OpretOpskriftMain = styled.main`
         background-color: #798b96;
       }
     }
+  }
 
   @media ${({ theme }) => theme.mediaQueries.bellow1200} {
     padding: 0 10px;
   }
   @media ${({ theme }) => theme.mediaQueries.bellow768} {
-    
+    form {
       .ButtonsContainer {
         flex-direction: column-reverse;
         div {
@@ -173,7 +169,7 @@ const OpretOpskriftMain = styled.main`
         }
       }
     }
-  
+  }
 
   .ingrediensCardContainer {
     display: flex;
@@ -220,8 +216,6 @@ const OpretOpskriftMain = styled.main`
 `;
 
 const OpretOpskrift = () => {
-  const [produkt, setProdukt] = useState();
-  const [billede, setBillede] = useState();
   const [kategorier, setKategorier] = useState();
   const [ingredienser, setIngredienser] = useState([]);
 
@@ -237,8 +231,23 @@ const OpretOpskrift = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-    opretProdukt(produkt, billede).then(setOprettet(true));
+    let produkt = {
+      titel: e.target.titel.value,
+      teaser: e.target.teaser.value,
+      beskrivelse: e.target.beskrivelse.value,
+      tilberedningstid: e.target.tilberedningstid.value,
+      antal: e.target.antal.value,
+      pris: e.target.pris.value,
+      kategori: e.target.kategori.value,
+      ingredienser: ingredienser,
+    };
+    console.log(produkt);
+
+    let image = e.target.image.files[0];
+
+    opretProdukt(produkt, image).then(setOprettet(true));
+
+    console.log("image", image);
   };
 
   function addIngrediens(e) {
@@ -248,12 +257,9 @@ const OpretOpskrift = () => {
 
     const ingrediens = Object.fromEntries(new FormData(e.target));
     console.log(ingrediens);
-    
 
     setIngredienser((ingredienser) => [...ingredienser, ingrediens]);
-    setProdukt({...produkt, ingredienser: [...ingredienser, ingrediens]})
   }
-  
 
   console.log(ingredienser);
 
@@ -288,7 +294,7 @@ const OpretOpskrift = () => {
           <header>
             <h2>Opret Opskrift</h2>
           </header>
-          <form id="opretForm" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} id="opretForm">
             <label htmlFor="inpTitel">Indtast opskriftens titel</label>
             <input
               type="text"
@@ -296,7 +302,6 @@ const OpretOpskrift = () => {
               placeholder="Titel..."
               required
               id="inpTitel"
-              onChange={(e) => setProdukt({ ...produkt, titel: e.target.value })}
             />
             <label htmlFor="inpTeaser">Indtast opskriftens teaser</label>
             <input
@@ -305,7 +310,6 @@ const OpretOpskrift = () => {
               placeholder="Teaser..."
               required
               id="inpTeaser"
-              onChange={(e) => setProdukt({ ...produkt, teaser: e.target.value })}
             />
             <label htmlFor="inpBeskrivelse">
               Indtast opskriftens beskrivelse
@@ -316,7 +320,6 @@ const OpretOpskrift = () => {
               placeholder="Beskrivelse..."
               required
               id="inpBeskrivelse"
-              onChange={(e) => setProdukt({ ...produkt, beskrivelse: e.target.value })}
             />
             <label htmlFor="inpTilberedningstid">
               Indtast opskriftens tilberedningstid i minutter
@@ -327,7 +330,6 @@ const OpretOpskrift = () => {
               placeholder="Tilberedningstid..."
               required
               id="inpTilberedningstid"
-              onChange={(e) => setProdukt({ ...produkt, tilberedningstid: e.target.value })}
             />
             {/* <input type="text" name="rolle" value="medlem" hidden required /> */}
             <label htmlFor="inpAntal">Intast opskriftens antal</label>
@@ -337,7 +339,6 @@ const OpretOpskrift = () => {
               placeholder="Antal..."
               required
               id="inpAntal"
-              onChange={(e) => setProdukt({ ...produkt, antal: e.target.value })}
             />
 
             <input
@@ -346,10 +347,10 @@ const OpretOpskrift = () => {
               placeholder="Pris..."
               required
               id="inpPris"
-              onChange={(e) => setProdukt({ ...produkt, pris: e.target.value })}
             />
 
             <Imageuploader
+              name="image"
               withIcon={true}
               buttonText="Vælg et billede"
               withLabel={true}
@@ -357,11 +358,8 @@ const OpretOpskrift = () => {
               singleImage={true}
               withPreview={true}
               required={true}
-              onChange={(image) => {
-                setBillede(image[0]);
-              }}
             />
-            <select name="kategori" defaultValue="DEFAULT" id="kategoriselect" onChange={(e) => setProdukt({ ...produkt, kategori: e.target.value })}>
+            <select name="kategori" defaultValue="DEFAULT" id="kategoriselect">
               <option value="DEFAULT" disabled>
                 Vælg kategori
               </option>
@@ -417,11 +415,6 @@ const OpretOpskrift = () => {
                 Tilføj ingrediens
               </button>
             </div>
-          </form>
-          <section className="ingrediensCardContainer">
-            <ul>{ingrediensliste}</ul>
-          </section>
-         
 
             <div className="ButtonsContainer">
               <div>
@@ -432,6 +425,10 @@ const OpretOpskrift = () => {
                 Opret
               </button>
             </div>
+          </form>
+          <section className="ingrediensCardContainer">
+            <ul>{ingrediensliste}</ul>
+          </section>
          
         </>
       ) : (

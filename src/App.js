@@ -22,23 +22,13 @@ import Login from "./components/auth/Login";
 import Logout from "./components/auth/Logout";
 import OpretBruger from "./components/auth/OpretBruger";
 
-// context
-import { AuthDataContext } from "./components/context/AuthDataContext";
+// // context
+// import { AuthDataContext } from "./components/context/AuthDataContext";
 
 // CSS - Font
 import "./theme/font.css";
 
 function App() {
-
-  // skjuler private routes hvis der ikke er en bruger i context
-  const PrivateRoute = ({ component, ...options }) => {
-    const { loggedIn } = useContext(AuthDataContext);
-    console.log("privateroute: loggedIn", loggedIn);
-
-    // hvis context har loggedIn/true (= der er logget ind) så vis den (private) component - ellers send til login
-    const finalComponent = loggedIn ? component : Login;
-    return <Route {...options} component={finalComponent} />;
-  };
 
   return (
     <>

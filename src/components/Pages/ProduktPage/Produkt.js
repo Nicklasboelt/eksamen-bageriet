@@ -108,6 +108,7 @@ const ProductMain = styled.main`
 
     .produktInfoContainer {
       display: flex;
+      justify-content: space-between;
       width: 100%;
       height: 100%;
 
@@ -491,7 +492,9 @@ const Produkt = () => {
 
   useEffect(() => {
     hentUdvalgtProdukt(produktid).then(setProduktet);
+    
   }, [produktid]);
+
 
   const handleOnclick = () => {
     likeProdukt(produktid);
@@ -527,6 +530,7 @@ const Produkt = () => {
         </article>
       );
     });
+    
   }
 
   //----------- Ingrediensliste -----------------
